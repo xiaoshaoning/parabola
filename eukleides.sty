@@ -1,0 +1,18 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{eukleides}[2019/02/13 Embed eukleides graphics in LaTeX]
+
+\RequirePackage{filecontents}
+\RequirePackage{graphicx}
+\RequirePackage{epstopdf}
+\RequirePackage{shellesc}
+
+\newcounter{euk}
+\newenvironment{eukleides}{
+	\refstepcounter{euk}
+	% For some reason using begin/end doesn't work
+	\csname filecontents*\endcsname{diagram\theeuk.euk}
+}{
+	\csname endfilecontents*\endcsname
+	\ShellEscape{eukleides diagram\theeuk.euk}
+	\includegraphics[width=\linewidth]{diagram\theeuk}
+}

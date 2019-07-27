@@ -1,0 +1,40 @@
+box -10, -10, 10, 10
+O = point(0, 0)
+E = point(-3, 0)
+F = point(-3, 3)
+D = line(E, 90deg)
+P = parabola(O, D)
+
+A = point(-10, 0)
+A' = point(10, 0)
+
+B = point(0, 10)
+B' = point(0, -10)
+
+EF = line(E, F)
+
+C = point(P, -120deg)
+C_PROJ = projection(C, EF)
+
+draw
+  P
+  C.O blue
+  EF magenta
+  C_PROJ.C green
+end
+
+draw darkgray, arrow
+    A.A'; B'.B;
+end
+
+X = point(5, 7)
+
+label
+    O 235deg font("Consolas-Bold-12")
+    C 90deg font("Consolas-Bold-12")
+end
+
+draw font("Consolas-Bold-12")
+  "P" X 0deg
+  "B" C_PROJ 180deg
+end
